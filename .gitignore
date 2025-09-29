@@ -1,5 +1,5 @@
 .terraform
 ec2-ssh-key
 *.pub
-*.hcl
+.terraform.lock.hcl
 *.pkg

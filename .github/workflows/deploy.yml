@@ -48,6 +48,9 @@ jobs:
               sudo usermod -aG docker ec2-user
             fi
             
+            # Login to ECR
+            aws ecr get-login-password --region eu-central-1 | sudo docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY }}
+            
             # Pull and run container
             docker pull ${{ secrets.ECR_REPOSITORY }}:latest
             docker stop myapp || true
@@ -69,6 +72,9 @@ jobs:
               sudo systemctl start docker
               sudo usermod -aG docker ec2-user
             fi
+            
+            # Login to ECR
+            aws ecr get-login-password --region eu-central-1 | sudo docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY }}
             
             # Pull and run container
             docker pull ${{ secrets.ECR_REPOSITORY }}:latest

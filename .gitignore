@@ -1,0 +1,5 @@
+.terraform
+ec2-ssh-key
+.pub
+.hcl
+.pkg

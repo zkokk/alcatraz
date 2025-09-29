@@ -29,8 +29,8 @@ resource "aws_instance" "app_nodes" {
   instance_type               = var.instance_type
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ec2_ssh_key.key_name
-  security_groups             = [aws_security_group.flask_sg.name]
-  subnet_id                   = element([aws_default_subnet.a_subnet.id, aws_default_subnet.b_subnet.id], count.index)
+  security_groups             = [aws_security_group.flask_sg.id]
+  subnet_id                   = data.aws_subnets.default.ids[count.index]
 
   tags = {
     Name = "Web-App-Node-${count.index + 1}"

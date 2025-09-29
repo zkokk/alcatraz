@@ -1,24 +1,16 @@
-# VPC
-resource "aws_default_vpc" "default" {
+# Get the default VPC in the region
+data "aws_vpc" "default" {
+  default = true
+
   tags = {
     Name = var.vpc_name
   }
 }
 
-
-# Subnets
-resource "aws_default_subnet" "a_subnet" {
-  availability_zone = var.az_a
-
-  tags = {
-    Name = "subnet-a"
-  }
-}
-
-resource "aws_default_subnet" "b_subnet" {
-  availability_zone = var.az_b
-
-  tags = {
-    Name = "subnet-b"
+# Get all subnets in that VPC
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
   }
 }

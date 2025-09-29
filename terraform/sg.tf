@@ -1,7 +1,7 @@
 # App Sg
 resource "aws_security_group" "flask_sg" {
   name   = "flask-sg"
-  vpc_id = aws_default_vpc.default.id
+  vpc_id = data.aws_vpc.default.id
 
   ingress {
     description = "Allow SSH"
@@ -31,7 +31,7 @@ resource "aws_security_group" "flask_sg" {
 resource "aws_security_group" "alb_sg" {
   name        = "alb-sg"
   description = "Allow HTTP from internet"
-  vpc_id      = aws_default_vpc.default.id
+  vpc_id      = data.aws_vpc.default.id
 
   ingress {
     description = "HTTP"

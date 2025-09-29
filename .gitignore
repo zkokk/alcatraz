@@ -3,3 +3,5 @@ ec2-ssh-key
 *.pub
 .terraform.lock.hcl
 *.pkg
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup

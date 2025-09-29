@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and push docker image
         run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY }}/ping-app:latest .
+          docker build -t ${{ secrets.ECR_REPOSITORY }}/ping-app:latest ./web-app
           docker push ${{ secrets.ECR_REPOSITORY }}/ping-app:latest
         env:
           AWS_REGION: eu-central-1

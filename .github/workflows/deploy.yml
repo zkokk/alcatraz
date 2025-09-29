@@ -39,7 +39,6 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Install Docker if not installed
             if ! command -v docker &> /dev/null
             then
               sudo yum install -y docker
@@ -48,10 +47,8 @@ jobs:
               sudo usermod -aG docker ec2-user
             fi
             
-            # Login to ECR
             aws ecr get-login-password --region eu-central-1 | sudo docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY }}
             
-            # Pull and run container
             sudo docker pull ${{ secrets.ECR_REPOSITORY }}:latest
             sudo docker stop myapp || true
             sudo docker rm myapp || true 
@@ -64,7 +61,6 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Install Docker if not installed
             if ! command -v docker &> /dev/null
             then
               sudo yum install -y docker
@@ -73,10 +69,8 @@ jobs:
               sudo usermod -aG docker ec2-user
             fi
             
-            # Login to ECR
             aws ecr get-login-password --region eu-central-1 | sudo docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY }}
             
-            # Pull and run container
             sudo docker pull ${{ secrets.ECR_REPOSITORY }}:latest
             sudo docker stop myapp || true
             sudo docker rm myapp || true 

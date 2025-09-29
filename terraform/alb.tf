@@ -3,7 +3,7 @@ resource "aws_lb" "flask_alb" {
   name               = "flask-alb"
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
-  #  subnets            = [aws_default_subnet.a_subnet.]
+  subnets            = [aws_default_subnet.a_subnet.id, aws_default_subnet.b_subnet.id]
 }
 
 resource "aws_lb_target_group" "flask_tg" {

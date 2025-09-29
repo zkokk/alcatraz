@@ -18,7 +18,7 @@ data "aws_ami" "amazon" {
 # SSH Key
 resource "aws_key_pair" "ec2_ssh_key" {
   key_name   = "ec2-ssh-key"
-  public_key = file("ec2-ssh-key.pub")
+  public_key = file("../ec2-ssh-key.pub")
 }
 
 
@@ -27,9 +27,9 @@ resource "aws_instance" "app_nodes" {
   count                       = var.instance_count
   ami                         = data.aws_ami.amazon.id
   instance_type               = var.instance_type
-  associate_public_ip_address = True
+  associate_public_ip_address = true
   key_name                    = aws_key_pair.ec2_ssh_key.key_name
-  security_groups             = [aws_security_group.flask_sg]
+  security_groups             = [aws_security_group.flask_sg.name]
   subnet_id                   = element([aws_default_subnet.a_subnet.id, aws_default_subnet.b_subnet.id], count.index)
 
   tags = {

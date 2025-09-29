@@ -27,6 +27,7 @@ resource "aws_instance" "app_nodes" {
   count                       = var.instance_count
   ami                         = data.aws_ami.amazon.id
   instance_type               = var.instance_type
+  iam_instance_profile        = aws_iam_instance_profile.ec2_instance_profile.name
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ec2_ssh_key.key_name
   security_groups             = [aws_security_group.flask_sg.id]

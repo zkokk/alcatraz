@@ -33,7 +33,7 @@ jobs:
 
 
       - name: Deploy docker image to EC2 instance 1 via SSH
-        uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST_1 }}
           username: ec2-user
@@ -55,7 +55,7 @@ jobs:
             sudo docker run -d --name myapp -p 8080:8080 ${{ secrets.ECR_REPOSITORY }}:latest
 
       - name: Deploy docker image to EC2 instance 2 via SSH
-        uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST_2 }}
           username: ec2-user

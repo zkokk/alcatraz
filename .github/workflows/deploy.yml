@@ -9,7 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v2
@@ -24,7 +24,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Deploy docker image to EC2 instance 1 via SSH
-        uses: appleboy/ssh-action@v1.2.0
+        uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
         with:
           host: ${{ secrets.EC2_HOST_1 }}
           username: ec2-user
@@ -36,7 +36,7 @@ jobs:
             docker run -d --name myapp -p 8080:8080 ${{ secrets.ECR_REPOSITORY }}:latest
 
       - name: Deploy docker image to EC2 instance 2 via SSH
-        uses: appleboy/ssh-action@v1.2.0
+        uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
         with:
           host: ${{ secrets.EC2_HOST_2 }}
           username: ec2-user

@@ -4,6 +4,14 @@ resource "aws_security_group" "flask_sg" {
   vpc_id = aws_default_vpc.default.id
 
   ingress {
+    description = "Allow SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     description     = "Allow app traffic from ALB"
     from_port       = 8080
     to_port         = 8080

@@ -24,12 +24,13 @@ resource "aws_key_pair" "ec2_ssh_key" {
 
 # EC2 instances
 resource "aws_instance" "app_nodes" {
-  count           = var.instance_count
-  ami             = data.aws_ami.amazon.id
-  instance_type   = var.instance_type
-  key_name        = aws_key_pair.ec2_ssh_key.key_name
-  security_groups = [aws_security_group.flask_sg]
-  subnet_id       = element([aws_default_subnet.a_subnet.id, aws_default_subnet.b_subnet.id], count.index)
+  count                       = var.instance_count
+  ami                         = data.aws_ami.amazon.id
+  instance_type               = var.instance_type
+  associate_public_ip_address = True
+  key_name                    = aws_key_pair.ec2_ssh_key.key_name
+  security_groups             = [aws_security_group.flask_sg]
+  subnet_id                   = element([aws_default_subnet.a_subnet.id, aws_default_subnet.b_subnet.id], count.index)
 
   tags = {
     Name = "Web-App-Node-${count.index + 1}"

@@ -5,3 +5,4 @@ ec2-ssh-key
 *.pkg
 terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
+Screenshots/
